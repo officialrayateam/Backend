@@ -59,9 +59,38 @@ class Order(models.Model):
         verbose_name="قیمت کل سفارش")
     order_date = models.DateField(auto_now=True, verbose_name="تاریخ سفارش")
     order_delivery_date = models.DateTimeField(
-        verbose_name="تاریخ تحویل سفارش")
+        verbose_name="تاریخ تحویل سفارش", null=True, blank=True)
     status = models.CharField(
         max_length=1, choices=STATUS_CHOICES, verbose_name="وضعیت")
+
+    def update_price(self):
+        order_items = self.orderitem_set.all()
+        sum_price = 0
+        for i in order_items:
+            sum_price += (i.product_price - i.product_discount) * \
+                i.product_count
+        self.order_full_price = sum_price
+        self.save()
+
+    @classmethod
+    def get_basket(cls, user):
+        basket = cls.objects.filter(user=user.id, status="1")
+        if basket.exists():
+            return basket
+        return None
+
+    @classmethod
+    def create_basket(cls, user):
+        my_basket = cls(
+            user=user,
+            receiver_name=user.first_name,
+            receiver_address=user.address,
+            receiver_phone=user.phone,
+            order_full_price=0,
+            status=1
+        )
+        my_basket.save()
+        return my_basket
 
     class Meta:
         verbose_name = "سفارش"
@@ -77,6 +106,37 @@ class OrderItem(models.Model):
     product_discount = models.PositiveBigIntegerField(
         verbose_name="تخفیف محصول", default=0)
     product_count = models.IntegerField(verbose_name="تعداد محصول")
+
+    @classmethod
+    def add(cls, order, product, count):
+        data = cls.objects.filter(order=order, product__id=product)
+        if data.exists():
+            my_order_item = data.get()
+            my_order_item.product_price = my_order_item.product.price
+            my_order_item.product_discount = my_order_item.product.discount
+            my_order_item.product_count = my_order_item.product_count + 1
+            my_order_item.save()
+            my_order_item.order.update_price()
+            return True
+        else:
+            instance = cls(order=order, product_price=product.price,
+                           product_discount=product.discount,
+                           product=product, product_count=count)
+            instance.save()
+            instance.order.update_price()
+            return True
+
+    @classmethod
+    def remove(cls, order, product, count):
+        data = cls.objects.filter(order=order, product__id=product)
+        if data.exists():
+            my_order_item = data.get()
+            my_order_item.product_count -= count
+            my_order_item.save()
+            my_order_item.order.update_price()
+            return True
+        else:
+            return False
 
     class Meta:
         verbose_name = "ایتم"

@@ -1,0 +1,128 @@
+@media screen and (min-width: 576px) {
+  .main-grid {
+    grid-template-columns: 1fr 22rem;
+  }
+
+  .grid-profile {
+    grid-template-columns: 20rem 1fr;
+  }
+
+  .grid-profile .user-prof {
+    position: sticky;
+    top: 1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  th {
+    display: none;
+  }
+  table :is(td) {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+  }
+  table tr:not(:last-child) td:last-child {
+    border-bottom: 1px solid var(--clr-grey-400);
+  }
+  td::after {
+    content: attr(data-cell) " :";
+    font-weight: 800;
+  }
+  table td div {
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  #header .main-header nav ul {
+    display: flex;
+  }
+
+  .nav-bottom {
+    display: none;
+  }
+
+  footer.pc {
+    margin-bottom: 0 !important;
+  }
+
+  #slider .main-slider {
+    height: 35rem;
+  }
+
+  #progress__bar article .progress__sections p {
+    font-size: 1.3rem;
+  }
+
+  #progress__bar article .progress__sections p i {
+    font-size: 2rem;
+  }
+
+  #purchase__products .main-grid .right .product__box .right__section h3 {
+    font-size: 1.5rem;
+  }
+
+  #purchase__products .main-grid .right .product__box .left__section>p {
+    font-size: 1.5rem;
+  }
+
+  #purchase__products .main-grid .right .product__box .left__section .product__price p {
+    font-size: 1.2rem;
+  }
+
+  #purchase__products .main-grid .right .product__box .right__section .count__section button {
+    padding: 7px;
+  }
+
+  #purchase__products .main-grid .right .product__box .right__section .count__section .product__count {
+    font-size: 1.3rem;
+  }
+  .grid-profile .user-prof__info .body .flex {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .grid-profile .user-prof__info .body .flex>div:not(.line) {
+    flex: 1;
+    display: flex;
+    height: 100%;
+  }
+
+  .grid-profile .user-prof__info .body .flex>div:not(.line) p {
+    display: grid;
+  }
+
+  .grid-profile .user-prof__info .body .flex .line {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  #slider .main-slider {
+    height: 40rem;
+  }
+  .grid-profile .user-prof__info .body .flex>div:not(.line) p {
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #slider .main-slider {
+    height: 45rem;
+  }
+}
+
+
+/* زیر 400 پیکسل : برای گوشی های با صفحه نمایش کوچک */
+
+/* بالای 400 پیکسل تا 576 پیکسل : گوشی های با صفحه نمایش معمولی رو به بالا */
+
+/* از 576 پیکسل تا 768 پیکسل تبلت و گوشی های با صفحه نمایش بزرگ */
+
+/* از 768 پیکسل تا 992 پیکسل لپ تاپ های با صفحه نمایش کوچک  */
+
+/* از 992 پیکسل به بالا لپ تاپ و مانیتور */

@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from store.models import Category, Product
+from store.models import Category, Order, OrderItem, Product
 from api.serializers import CategorySerializer, ProductSerializer
 
 
@@ -36,3 +36,29 @@ class Products(APIView):
             products = products.filter(name__contains=name)
         answer = ProductSerializer(products, many=True)
         return Response(answer.data)
+
+
+class BasketAddView(APIView):
+    def get(self, request):
+        count = request.GET.get("count", 0)
+        product = request.GET.get("product", 0)
+        my_order = Order.objects.filter(user=request.user, status="1")
+        if my_order.exists():
+            my_order = my_order.get()
+            OrderItem.add(my_order, product, count)
+        else:
+            basket = Order.create_basket(request.user)
+            OrderItem.add(basket, product, count)
+
+
+class BasketRemoveView(APIView):
+    def get(self, request):
+        count = request.GET.get("count", 0)
+        product = request.GET.get("product", 0)
+        my_order = Order.objects.filter(user=request.user, status="1")
+        if my_order.exists():
+            my_order = my_order.get()
+            OrderItem.remove(my_order, product, count)
+        else:
+            basket = Order.create_basket(request.user)
+            OrderItem.remove(basket, product, count)

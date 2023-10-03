@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.http.request import HttpRequest
 from store.models import Category, Order, Product
 
 
