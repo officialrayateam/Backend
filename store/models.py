@@ -12,7 +12,7 @@ class Product(models.Model):
     stock = models.PositiveIntegerField(verbose_name="موجودی محصول", default=0)
     price = models.PositiveBigIntegerField(verbose_name="قیمت محصول")
     discount = models.PositiveBigIntegerField(
-        null=True, blank=True, verbose_name="تخفیف محصول")
+        null=True, blank=True, verbose_name="تخفیف محصول", default=0)
     special = models.BooleanField(verbose_name="ویژه")
     selled_count = models.IntegerField(verbose_name="تعداد فروش", default=0)
 
@@ -48,6 +48,12 @@ class Order(models.Model):
         ("6", "انصراف داده شد"),
     )
 
+    PAYMENT_CHOICES = (
+        ("1", "پرداخت انلاین"),
+        ("2", "پرداخت حضوری در فروشگاه"),
+        ("3", "پرداخت حضوری در منزل"),
+    )
+
     user = models.ForeignKey(
         Users, on_delete=models.CASCADE, verbose_name="کاربر")
     receiver_name = models.CharField(
@@ -60,8 +66,13 @@ class Order(models.Model):
     order_date = models.DateField(auto_now=True, verbose_name="تاریخ سفارش")
     order_delivery_date = models.DateTimeField(
         verbose_name="تاریخ تحویل سفارش", null=True, blank=True)
+    payment_method = models.CharField(
+        max_length=1, choices=PAYMENT_CHOICES, verbose_name="روش پرداخت", null=True, blank=True)
     status = models.CharField(
         max_length=1, choices=STATUS_CHOICES, verbose_name="وضعیت")
+
+    def __str__(self) -> str:
+        return f"{self.user.get_full_name()} خرید ({dict(self.STATUS_CHOICES)[self.status]})"
 
     def update_price(self):
         order_items = self.orderitem_set.all()
@@ -72,18 +83,26 @@ class Order(models.Model):
         self.order_full_price = sum_price
         self.save()
 
+    def get_sum_discount(self):
+        order_items = self.orderitem_set.all()
+        answer = 0
+        for i in order_items:
+            if i.product.discount:
+                answer += i.product.discount
+        return answer
+
     @classmethod
     def get_basket(cls, user):
         basket = cls.objects.filter(user=user.id, status="1")
         if basket.exists():
-            return basket
+            return basket.get()
         return None
 
     @classmethod
     def create_basket(cls, user):
         my_basket = cls(
             user=user,
-            receiver_name=user.first_name,
+            receiver_name=user.get_full_name(),
             receiver_address=user.address,
             receiver_phone=user.phone,
             order_full_price=0,
@@ -105,7 +124,14 @@ class OrderItem(models.Model):
     product_price = models.PositiveBigIntegerField(verbose_name="قیمت محصول")
     product_discount = models.PositiveBigIntegerField(
         verbose_name="تخفیف محصول", default=0)
-    product_count = models.IntegerField(verbose_name="تعداد محصول")
+    product_count = models.IntegerField(verbose_name="تعداد محصول")\
+
+
+    def get_actual_price(self):
+        if self.product.discount:
+            return self.product.price - self.product.discount
+        else:
+            return self.product.price
 
     @classmethod
     def add(cls, order, product, count):

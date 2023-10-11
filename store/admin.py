@@ -1,5 +1,5 @@
 from django.contrib import admin
-from store.models import Category, Order, Product
+from store.models import Category, Order, OrderItem, Product
 
 
 @admin.register(Product)
@@ -26,4 +26,9 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ["receiver_name"]
     # def has_add_permission(self, request):
     #     return False
+    pass
+
+
+@admin.register(OrderItem)
+class OrderItemAdmin(admin.ModelAdmin):
     pass

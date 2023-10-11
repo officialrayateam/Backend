@@ -34,6 +34,7 @@ class LoginRegisterView(View):
             user = Users.objects.create_user(
                 username=username, password=password1)
             user.save()
+            login(request, user)
             return redirect("/")
         else:
             return render(request, "LoginRegister.html", {"special_error": "فک کردی میتونی کاری کنی ؟"})
@@ -41,17 +42,46 @@ class LoginRegisterView(View):
 
 class CartView(View):
     def get(self, request):
-        basket = Order.get_basket(request.user)
-        order_items = basket.orderitem_set.all()
-        if basket:
-            return render(request, "cart.html", {"basket": basket, "items": order_items})
+        if request.user.is_authenticated:
+            basket = Order.get_basket(request.user)
+            if basket:
+                sum_discount = basket.get_sum_discount()
+                price_to_pay = basket.order_full_price - sum_discount
+                order_items = basket.orderitem_set.all()
+                return render(request, "cart.html", {"basket": basket, "items": order_items, "sum_discount": sum_discount, "full_price": basket.order_full_price, "price_to_pay": price_to_pay})
+            else:
+                return render(request, "cart.html", {"basket": None, "items": None, "sum_discount": 0, "full_price": 0, "price_to_pay": 0})
         else:
-            return render(request, "cart.html", {"basket": None, "items": None})
+            return redirect("login")
 
 
 class CheckoutView(View):
     def get(self, request):
-        return render(request, "checkout.html")
+        if request.user.is_authenticated:
+            basket = Order.get_basket(request.user)
+            address = request.user.address
+            phone = request.user.phone
+            name = request.user.get_full_name()
+            if basket:
+                sum_discount = basket.get_sum_discount()
+                price_to_pay = basket.order_full_price - sum_discount
+                order_items = basket.orderitem_set.all()
+                return render(request, "checkout.html", {"basket": basket, "items": order_items, "sum_discount": sum_discount, "full_price": basket.order_full_price, "price_to_pay": price_to_pay, "name": name, "phone": phone, "address": address})
+            else:
+                return redirect("cart")
+        else:
+            return redirect("login")
+
+    def post(self, request):
+        payemnt_gateway = (request.POST["payment-gateway"])
+        basket = Order.get_basket(request.user)
+        if basket:
+            basket.payment_method = payemnt_gateway
+            basket.status = "2"
+            basket.save()
+            return redirect("cart")
+        else:
+            return redirect("cart")
 
 
 class OrdersView(View):

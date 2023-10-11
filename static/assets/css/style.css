@@ -119,7 +119,7 @@ body[data-type="noScroll"] {
 }
 
 #header .main-header nav ul li a i.bx-shopping-bag::after {
-  content: "2";
+  content: attr(data-count);
   position: absolute;
   top: -1.2rem;
   right: -1.2rem;

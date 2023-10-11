@@ -21,12 +21,12 @@
             <img src="/static/images/logo-social.png" alt="logo">
           </a>
           <ul>
-            <li><a href="#">ورود / ثبت نام <i class='bx bx-user-pin'></i></a></li>
-            <li><a href="#">سبد خرید <i class='bx bx-shopping-bag'></i></a></li>
+            <li><a href="/login">ورود / ثبت نام <i class='bx bx-user-pin'></i></a></li>
+            <li><a href="/cart">سبد خرید <i class='bx bx-shopping-bag' data-count="{{reqeust.length}}"></i></a></li>
           </ul>
         </nav>
         <div class="form">
-          <form action="#" class="search">
+          <form action="/products" class="search">
             <input type="text" placeholder="جستجو کنید">
             <button type="submit" class="btn">
               <i class='bx bx-search-alt'></i>
@@ -76,145 +76,47 @@
       <div class="container">
         <div class="main-grid">
           <article class="right">
-            <div class="product__box">
-              <div class="right__section">
-                <h3>آجیل</h3>
-                <div class="count__section">
-                  <button class="plus__btn"><i class="bx bx-plus"></i></button>
-                  <p class="product__count">1</p>
-                  <button class="minus__btn"><i class="bx bx-minus"></i></button>
+            {% for item in items %}
+              <div class="product__box">
+                <div class="right__section">
+                  <h3>{{ item.product.category.name }}</h3>
+                  <div class="count__section">
+                    <button class="plus__btn"><i class="bx bx-plus"></i></button>
+                    <p class="product__count">{{ item.product_count }}</p>
+                    <button class="minus__btn"><i class="bx bx-minus"></i></button>
+                  </div>
+                </div>
+                <div class="left__section">
+                  <p>{{ item.product.name }}</p>
+                  <div class="product__price">
+                    {% if item.product.discount %}
+                      <p class="discount"><del>{{ item.product.price }}</del>تومان</p>
+                    {% endif %}
+                    <p class="actual__count"><span>{{ item.get_actual_price }}</span>تومان</p>
+                  </div>
                 </div>
               </div>
-              <div class="left__section">
-                <p>آجیل چهار مغز ۴۵۰ گرم آجیل آجیل آجیل آجیل آجیل آجیل آجیل آجیل آجیل آجیل آجیل آجیل</p>
-                <div class="product__price">
-                  <p class="discount"><del>195000</del>تومان</p>
-                  <p class="actual__count"><span>175000</span>تومان</p>
-                </div>
-              </div>
-            </div>
-            <div class="product__box">
-              <div class="right__section">
-                <h3>آجیل</h3>
-                <div class="count__section">
-                  <button class="plus__btn"><i class="bx bx-plus"></i></button>
-                  <p class="product__count">1</p>
-                  <button class="minus__btn"><i class="bx bx-minus"></i></button>
-                </div>
-              </div>
-              <div class="left__section">
-                <p>آجیل چهار مغز ۴۵۰ گرم</p>
-                <div class="product__price">
-                  <p class="discount"><del>195000</del>تومان</p>
-                  <p class="actual__count"><span>175000</span>تومان</p>
-                </div>
-              </div>
-            </div>
-            <div class="product__box">
-              <div class="right__section">
-                <h3>آجیل</h3>
-                <div class="count__section">
-                  <button class="plus__btn"><i class="bx bx-plus"></i></button>
-                  <p class="product__count">1</p>
-                  <button class="minus__btn"><i class="bx bx-minus"></i></button>
-                </div>
-              </div>
-              <div class="left__section">
-                <p>آجیل چهار مغز ۴۵۰ گرم</p>
-                <div class="product__price">
-                  <p class="discount"><del>195000</del>تومان</p>
-                  <p class="actual__count"><span>175000</span>تومان</p>
-                </div>
-              </div>
-            </div>
-            <div class="product__box">
-              <div class="right__section">
-                <h3>آجیل</h3>
-                <div class="count__section">
-                  <button class="plus__btn"><i class="bx bx-plus"></i></button>
-                  <p class="product__count">1</p>
-                  <button class="minus__btn"><i class="bx bx-minus"></i></button>
-                </div>
-              </div>
-              <div class="left__section">
-                <p>آجیل چهار مغز ۴۵۰ گرم</p>
-                <div class="product__price">
-                  <p class="discount"><del>195000</del>تومان</p>
-                  <p class="actual__count"><span>175000</span>تومان</p>
-                </div>
-              </div>
-            </div>
-            <div class="product__box">
-              <div class="right__section">
-                <h3>آجیل</h3>
-                <div class="count__section">
-                  <button class="plus__btn"><i class="bx bx-plus"></i></button>
-                  <p class="product__count">1</p>
-                  <button class="minus__btn"><i class="bx bx-minus"></i></button>
-                </div>
-              </div>
-              <div class="left__section">
-                <p>آجیل چهار مغز ۴۵۰ گرم</p>
-                <div class="product__price">
-                  <p class="discount"><del>195000</del>تومان</p>
-                  <p class="actual__count"><span>175000</span>تومان</p>
-                </div>
-              </div>
-            </div>
-            <div class="product__box">
-              <div class="right__section">
-                <h3>آجیل</h3>
-                <div class="count__section">
-                  <button class="plus__btn"><i class="bx bx-plus"></i></button>
-                  <p class="product__count">1</p>
-                  <button class="minus__btn"><i class="bx bx-minus"></i></button>
-                </div>
-              </div>
-              <div class="left__section">
-                <p>آجیل چهار مغز ۴۵۰ گرم</p>
-                <div class="product__price">
-                  <p class="discount"><del>195000</del>تومان</p>
-                  <p class="actual__count"><span>175000</span>تومان</p>
-                </div>
-              </div>
-            </div>
-            <div class="product__box">
-              <div class="right__section">
-                <h3>آجیل</h3>
-                <div class="count__section">
-                  <button class="plus__btn"><i class="bx bx-plus"></i></button>
-                  <p class="product__count">1</p>
-                  <button class="minus__btn"><i class="bx bx-minus"></i></button>
-                </div>
-              </div>
-              <div class="left__section">
-                <p>آجیل چهار مغز ۴۵۰ گرم </p>
-                <div class="product__price">
-                  <p class="discount"><del>195000</del>تومان</p>
-                  <p class="actual__count"><span>175000</span>تومان</p>
-                </div>
-              </div>
-            </div>
+            {% endfor %}
           </article>
           <aside class="left">
             <div class="box__info">
               <div class="product__count row">
                 <h4>تعداد کالا</h4>
-                <p class="count">3</p>
+                <p class="count">{{ items|length }}</p>
               </div>
               <div class="product__actualcount row">
                 <h4>مبلغ کالا</h4>
-                <p class="price">390000 <span>تومان</span></p>
+                <p class="price">{{ full_price }} <span>تومان</span></p>
               </div>
               <div class="product__discount row">
                 <h4>جمع کل تخفیف</h4>
-                <p class="discount">40000 <span>تومان</span></p>
+                <p class="discount">{{ sum_discount }} <span>تومان</span></p>
               </div>
               <div class="product__discountprice row">
                 <h4>قابل پرداخت</h4>
-                <p class="actual__price">350000 <span>تومان</span></p>
+                <p class="actual__price">{{ price_to_pay }} <span>تومان</span></p>
               </div>
-              <a href="#">ادامه</a>
+              <a href="/checkout">ادامه</a>
             </div>
           </aside>
         </div>
