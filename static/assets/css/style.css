@@ -13,11 +13,10 @@ html {
 
 @font-face {
   font-family: "Vazir";
-  src:
-    url('../../fonts/vazir-font-v16.1.0/Vazir.ttf') format('truetype'),
-    url('../../fonts/vazir-font-v16.1.0/Vazir.woff') format('woff'),
-    url('../../fonts/vazir-font-v16.1.0/Vazir.woff2') format('woff2'),
-    url('../../fonts/vazir-font-v16.1.0/Vazir.eot') format('eot');
+  src: url("../../fonts/vazir-font-v16.1.0/Vazir.ttf") format("truetype"),
+    url("../../fonts/vazir-font-v16.1.0/Vazir.woff") format("woff"),
+    url("../../fonts/vazir-font-v16.1.0/Vazir.woff2") format("woff2"),
+    url("../../fonts/vazir-font-v16.1.0/Vazir.eot") format("eot");
 }
 
 * {
@@ -187,7 +186,7 @@ body[data-type="noScroll"] {
   left: 0;
   width: 100%;
   background-color: var(--clr-100);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, .3);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
   z-index: 10;
   border-top: 1px solid grey;
   border-bottom-left-radius: 5px;
@@ -241,7 +240,7 @@ main {
   display: none;
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, .7);
+  background: rgba(0, 0, 0, 0.7);
   z-index: 5;
 }
 
@@ -275,11 +274,11 @@ main {
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   cursor: pointer;
-  transition: all .3s ease-in-out;
-  -webkit-transition: all .3s ease-in-out;
-  -moz-transition: all .3s ease-in-out;
-  -ms-transition: all .3s ease-in-out;
-  -o-transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
 }
 
 #slider .main-slider .swiper-button-prev:hover,
@@ -319,26 +318,26 @@ main {
 }
 
 #category .grid-items li {
-  box-shadow: 0rem 5px 1rem rgba(0, 0, 0, .3);
+  box-shadow: 0rem 5px 1rem rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
-  transition: all .3s ease-in-out;
-  -webkit-transition: all .3s ease-in-out;
-  -moz-transition: all .3s ease-in-out;
-  -ms-transition: all .3s ease-in-out;
-  -o-transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
 }
 
 #category .grid-items li:hover {
   box-shadow: -1rem 1rem var(--bg-clr-red);
-  transform: scale(.9);
-  -webkit-transform: scale(.9);
-  -moz-transform: scale(.9);
-  -ms-transform: scale(.9);
-  -o-transform: scale(.9);
+  transform: scale(0.9);
+  -webkit-transform: scale(0.9);
+  -moz-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  -o-transform: scale(0.9);
 }
 
 #category .grid-items li:nth-child(odd):hover {
@@ -408,20 +407,20 @@ main {
   align-items: center;
   flex-direction: column;
   padding: 1rem;
-  transition: all .3s ease-in-out;
-  -webkit-transition: all .3s ease-in-out;
-  -moz-transition: all .3s ease-in-out;
-  -ms-transition: all .3s ease-in-out;
-  -o-transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
   background-color: var(--clr-100);
 }
 
 #product-slider .product-slider .product-swiper .item:hover {
-  transform: scale(.9);
-  -webkit-transform: scale(.9);
-  -moz-transform: scale(.9);
-  -ms-transform: scale(.9);
-  -o-transform: scale(.9);
+  transform: scale(0.9);
+  -webkit-transform: scale(0.9);
+  -moz-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  -o-transform: scale(0.9);
 }
 
 #product-slider .product-slider .product-swiper .swiper-slide:last-child {
@@ -432,7 +431,11 @@ main {
   margin-right: 2rem;
 }
 
-#product-slider .product-slider .product-swiper .swiper-slide:last-child .item {
+#product-slider
+  .product-slider
+  .product-swiper
+  .swiper-slide.activeShowAllIcon:last-child
+  .item {
   width: 5rem;
   height: 5rem;
   border-radius: 50%;
@@ -446,7 +449,12 @@ main {
   cursor: pointer;
 }
 
-#product-slider .product-slider .product-swiper .swiper-slide:last-child .item i {
+#product-slider
+  .product-slider
+  .product-swiper
+  .swiper-slide.activeShowAllIcon:last-child
+  .item
+  i {
   font-size: 1.5rem;
 }
 
@@ -526,7 +534,7 @@ main {
   background-color: var(--clr-100);
   width: 100%;
   padding: 1rem 0;
-  box-shadow: 0 0 .5rem rgba(0, 0, 0, .3);
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
 }
 
 .nav-bottom .main-nav-bottom {
@@ -548,20 +556,19 @@ main {
 }
 
 .nav-bottom .main-nav-bottom .item p {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   font-size: 1rem;
 }
 
 .nav-bottom .main-nav-bottom .item.count-box {
   position: relative;
-
 }
 
 .nav-bottom .main-nav-bottom .item.count-box::before {
-  content: '1';
+  content: "1";
   position: absolute;
-  top: -.5rem;
-  right: .5rem;
+  top: -0.5rem;
+  right: 0.5rem;
   width: 1.2rem;
   height: 1.2rem;
   border-radius: 50%;
@@ -584,7 +591,16 @@ footer {
   height: 20rem;
   position: relative;
   background-color: #ff4d4d;
-  clip-path: polygon(100% 100%, 100% 70.71%, 100% 0%, 63.21% 45.75%, 33.88% 10.18%, 0% 46.54%, 0% 70.71%, 0% 100%);
+  clip-path: polygon(
+    100% 100%,
+    100% 70.71%,
+    100% 0%,
+    63.21% 45.75%,
+    33.88% 10.18%,
+    0% 46.54%,
+    0% 70.71%,
+    0% 100%
+  );
   margin-bottom: 5.6rem;
   margin-top: auto;
 }
@@ -617,7 +633,6 @@ footer .footer-content p {
 
 /* footer */
 
-
 /* --------------------------------------------------Login Register-------------------------------------------------- */
 
 /* styling main */
@@ -634,15 +649,13 @@ footer .footer-content p {
 #LoginRegister .card {
   width: min(40rem, 90%);
   display: flex;
-  border-radius: .5rem;
-  -webkit-border-radius: .5rem;
-  -moz-border-radius: .5rem;
-  -ms-border-radius: .5rem;
-  -o-border-radius: .5rem;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
   overflow: hidden;
 }
-
-
 
 #LoginRegister .card .login__card,
 #LoginRegister .card .register__card {
@@ -653,23 +666,22 @@ footer .footer-content p {
   flex-shrink: 0;
   gap: 2rem;
   padding: 2rem;
-  transition: all .3s ease-in-out;
-  -webkit-transition: all .3s ease-in-out;
-  -moz-transition: all .3s ease-in-out;
-  -ms-transition: all .3s ease-in-out;
-  -o-transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
   background-color: var(--clr-100);
 }
 
-#LoginRegister .card[data-type='register'] .login__card,
-#LoginRegister .card[data-type='register'] .register__card {
+#LoginRegister .card[data-type="register"] .login__card,
+#LoginRegister .card[data-type="register"] .register__card {
   transform: translateX(100%);
   -webkit-transform: translateX(100%);
   -moz-transform: translateX(100%);
   -ms-transform: translateX(100%);
   -o-transform: translateX(100%);
 }
-
 
 #LoginRegister .card .logo {
   display: block;
@@ -701,14 +713,14 @@ footer .footer-content p {
 
 #LoginRegister .card form input {
   padding: 1.5rem 1rem;
-  border-radius: .5rem;
-  -webkit-border-radius: .5rem;
-  -moz-border-radius: .5rem;
-  -ms-border-radius: .5rem;
-  -o-border-radius: .5rem;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
   outline: none;
   border: 1px solid #ccc;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, .2);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 }
 
 #LoginRegister .card form[data-type="login"] input:nth-child(3) {
@@ -727,18 +739,18 @@ footer .footer-content p {
   color: #fff;
   outline: none;
   border: none;
-  border-radius: .5rem;
-  -webkit-border-radius: .5rem;
-  -moz-border-radius: .5rem;
-  -ms-border-radius: .5rem;
-  -o-border-radius: .5rem;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
   font-size: 1.8rem;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, .2);
-  transition: all .3s ease;
-  -webkit-transition: all .3s ease;
-  -moz-transition: all .3s ease;
-  -ms-transition: all .3s ease;
-  -o-transition: all .3s ease;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
 }
 
 #LoginRegister .card form button:hover {
@@ -761,7 +773,6 @@ footer .footer-content p {
 #LoginRegister .card form .login:hover {
   background-color: #15b6d6;
 }
-
 
 /* styling main */
 
@@ -938,15 +949,24 @@ footer .footer-content p {
   border: 1px solid var(--bg-clr-red);
   background-color: transparent;
   color: var(--bg-clr-red);
-
 }
 
-.main-grid .right .product__box .right__section .count__section button:is(:hover, :focus) {
+.main-grid
+  .right
+  .product__box
+  .right__section
+  .count__section
+  button:is(:hover, :focus) {
   color: var(--clr-100);
   background-color: var(--bg-clr-red);
 }
 
-.main-grid .right .product__box .right__section .count__section .product__count {
+.main-grid
+  .right
+  .product__box
+  .right__section
+  .count__section
+  .product__count {
   font-size: 1.2rem;
 }
 
@@ -956,7 +976,7 @@ footer .footer-content p {
   justify-content: space-between;
 }
 
-.main-grid .right .product__box .left__section>p {
+.main-grid .right .product__box .left__section > p {
   font-size: 1.2rem;
   margin-bottom: 1.5rem;
   display: -webkit-box;
@@ -979,7 +999,7 @@ footer .footer-content p {
   color: var(--clr-grey-400);
 }
 
-.main-grid .right .product__box .left__section .product__price p>* {
+.main-grid .right .product__box .left__section .product__price p > * {
   color: var(--bg-clr-red);
 }
 
@@ -1036,11 +1056,11 @@ footer .footer-content p {
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
-  transition: background-color .3s ease-in-out;
-  -webkit-transition: background-color .3s ease-in-out;
-  -moz-transition: background-color .3s ease-in-out;
-  -ms-transition: background-color .3s ease-in-out;
-  -o-transition: background-color .3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+  -webkit-transition: background-color 0.3s ease-in-out;
+  -moz-transition: background-color 0.3s ease-in-out;
+  -ms-transition: background-color 0.3s ease-in-out;
+  -o-transition: background-color 0.3s ease-in-out;
 }
 
 .main-grid .left .box__info a:hover {
@@ -1096,7 +1116,7 @@ footer .footer-content p {
 }
 
 .main-grid .user__address .user-address__body .head a {
-  padding: clamp(.5rem, .5vw + .5rem, 1rem);
+  padding: clamp(0.5rem, 0.5vw + 0.5rem, 1rem);
   color: grey;
   border: 1px solid grey;
   border-radius: 5px;
@@ -1104,11 +1124,11 @@ footer .footer-content p {
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
-  transition: all .3s ease-in-out;
-  -webkit-transition: all .3s ease-in-out;
-  -moz-transition: all .3s ease-in-out;
-  -ms-transition: all .3s ease-in-out;
-  -o-transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
 }
 
 .main-grid .user__address .user-address__body .head a:is(:hover, :focus) {
@@ -1119,7 +1139,7 @@ footer .footer-content p {
 .main-grid .user__address .user-address__body ul {
   display: flex;
   flex-direction: column;
-  gap: .3rem;
+  gap: 0.3rem;
 }
 
 .main-grid .user__address .user-address__body ul li {
@@ -1127,7 +1147,7 @@ footer .footer-content p {
   align-items: center;
   justify-content: start;
   flex-direction: row-reverse;
-  gap: .5rem;
+  gap: 0.5rem;
   color: grey;
 }
 .main-grid .user__address .user-address__body ul li i {
@@ -1135,7 +1155,7 @@ footer .footer-content p {
 }
 
 .main-grid .user__address .user-address__body ul li p {
-  font-size: clamp(.8rem, .5vw + 1rem, 1.3rem);
+  font-size: clamp(0.8rem, 0.5vw + 1rem, 1.3rem);
 }
 
 .main-grid .user__address .user-address__body ul li p span {
@@ -1149,12 +1169,12 @@ footer .footer-content p {
 
 .main-grid .user__payment .user__product {
   display: grid;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .main-grid .user__payment .user__product h3 {
   display: flex;
-  gap: .3rem;
+  gap: 0.3rem;
   font-size: clamp(1.2rem, 1.5vw + 1rem, 2rem);
   align-items: center;
   color: grey;
@@ -1162,7 +1182,7 @@ footer .footer-content p {
 
 .main-grid .user__payment .user__product .row {
   display: flex;
-  gap: .5rem;
+  gap: 0.5rem;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
 }
@@ -1182,17 +1202,17 @@ footer .footer-content p {
 .main-grid .user__payment .user__product .row .product__img::before {
   content: "1";
   position: absolute;
-  bottom: .3rem;
-  left: .3rem;
+  bottom: 0.3rem;
+  left: 0.3rem;
   width: 1.5rem;
   height: 1.5rem;
   background-color: var(--bg-clr-red);
   color: var(--clr-100);
-  border-radius: .5rem;
-  -webkit-border-radius: .5rem;
-  -moz-border-radius: .5rem;
-  -ms-border-radius: .5rem;
-  -o-border-radius: .5rem;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1200,34 +1220,40 @@ footer .footer-content p {
 
 .main-grid .user__payment .how-to__pay {
   display: grid;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .main-grid .user__payment .how-to__pay h3 {
   display: flex;
   align-items: center;
-  gap: .3rem;
+  gap: 0.3rem;
   color: grey;
   font-size: clamp(1.2rem, 1.5vw + 1rem, 2rem);
 }
 
 .main-grid .user__payment .how-to__pay form {
   display: grid;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .main-grid .user__payment .how-to__pay form .payment__box {
   display: grid;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .main-grid .user__payment .how-to__pay form .payment__box .title {
   display: flex;
   align-items: center;
-  gap: .3rem;
+  gap: 0.3rem;
 }
 
-.main-grid .user__payment .how-to__pay form .payment__box .title input[type="radio"]{
+.main-grid
+  .user__payment
+  .how-to__pay
+  form
+  .payment__box
+  .title
+  input[type="radio"] {
   accent-color: var(--bg-clr-red);
 }
 
@@ -1236,7 +1262,7 @@ footer .footer-content p {
 }
 
 .main-grid .user__payment .how-to__pay form .payment__box p {
-  font-size: clamp(.8rem, calc(.5vw + 1rem), 1.3rem);
+  font-size: clamp(0.8rem, calc(0.5vw + 1rem), 1.3rem);
   padding-right: 1.32rem;
 }
 /* --------------------------------------------------checkout-------------------------------------------------- */
@@ -1251,11 +1277,11 @@ footer .footer-content p {
 
 .grid-profile > * {
   border: 1px solid var(--clr-grey-400);
-  border-radius: .5rem;
-  -webkit-border-radius: .5rem;
-  -moz-border-radius: .5rem;
-  -ms-border-radius: .5rem;
-  -o-border-radius: .5rem;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
   position: relative;
 }
 
@@ -1270,7 +1296,7 @@ footer .footer-content p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: .5rem;
+  gap: 0.5rem;
   font-size: clamp(1.2rem, 1vw + 1rem, 2rem);
 }
 
@@ -1288,11 +1314,11 @@ footer .footer-content p {
 }
 
 .grid-profile .body ul li {
-  transition: background-color .3s ease-in-out;
-  -webkit-transition: background-color .3s ease-in-out;
-  -moz-transition: background-color .3s ease-in-out;
-  -ms-transition: background-color .3s ease-in-out;
-  -o-transition: background-color .3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+  -webkit-transition: background-color 0.3s ease-in-out;
+  -moz-transition: background-color 0.3s ease-in-out;
+  -ms-transition: background-color 0.3s ease-in-out;
+  -o-transition: background-color 0.3s ease-in-out;
 }
 
 .grid-profile .body ul li.active {
@@ -1307,16 +1333,16 @@ footer .footer-content p {
   color: var(--clr-100);
 }
 
-.grid-profile .body ul li a{
+.grid-profile .body ul li a {
   display: flex;
   align-items: center;
-  gap: .3rem;
-  font-size: clamp(1rem, 1vw + .5rem, 1.5rem);
+  gap: 0.3rem;
+  font-size: clamp(1rem, 1vw + 0.5rem, 1.5rem);
   color: grey;
 }
 
 .grid-profile .body ul li a i {
-  font-size: clamp(1rem, 1vw + .8rem, 1.5rem);
+  font-size: clamp(1rem, 1vw + 0.8rem, 1.5rem);
   color: var(--bg-clr-red);
 }
 
@@ -1360,18 +1386,18 @@ footer .footer-content p {
   flex-grow: 1;
   display: flex;
   align-items: center;
-  font-size: clamp(1rem, 1vw + .1rem, 1.5rem);
+  font-size: clamp(1rem, 1vw + 0.1rem, 1.5rem);
   color: grey;
 }
 
 .grid-profile .user-prof__info .body .flex div p i {
-  font-size: clamp(1rem, 1vw + .8rem, 1.5rem);
+  font-size: clamp(1rem, 1vw + 0.8rem, 1.5rem);
   color: var(--bg-clr-red);
-  margin-left: .3rem;
+  margin-left: 0.3rem;
 }
 
 .grid-profile .user-prof__info .body .flex div > i {
-  font-size: clamp(1rem, 1vw + .8rem, 1.5rem);
+  font-size: clamp(1rem, 1vw + 0.8rem, 1.5rem);
   color: var(--bg-clr-blue);
   cursor: pointer;
 }
@@ -1388,7 +1414,7 @@ table :is(th, td) {
   background-color: #fff;
   border: 1px solid var(--clr-grey-400);
   text-align: center;
-  font-size: clamp(1rem, 1vw + .1rem, 1.5rem);
+  font-size: clamp(1rem, 1vw + 0.1rem, 1.5rem);
   padding: 1.5rem 1rem;
 }
 
@@ -1404,7 +1430,7 @@ table td div {
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   background-color: var(--bg-clr-blue);
-  padding: .5rem;
+  padding: 0.5rem;
   margin-inline: auto;
 }
 
@@ -1428,15 +1454,15 @@ table td div[data-state="NP"] {
 
 #products .main-grid-products .product__cart {
   border: 1px solid var(--clr-grey-400);
-  border-radius: .5rem;
-  -webkit-border-radius: .5rem;
-  -moz-border-radius: .5rem;
-  -ms-border-radius: .5rem;
-  -o-border-radius: .5rem;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
   overflow: hidden;
   padding: 1rem;
   display: grid;
-  gap: .7rem;
+  gap: 0.7rem;
 }
 
 #products .main-grid-products .product__cart .image {
@@ -1467,12 +1493,12 @@ table td div[data-state="NP"] {
 }
 
 #products .main-grid-products .product__cart .row h3 {
-  font-size: clamp(1.1rem, 1vw + .5rem, 1.2rem);
+  font-size: clamp(1.1rem, 1vw + 0.5rem, 1.2rem);
 }
 
 #products .main-grid-products .product__cart .row p {
   color: grey;
-  font-size: clamp(.9rem, 1vw + .3rem, 1.1rem);
+  font-size: clamp(0.9rem, 1vw + 0.3rem, 1.1rem);
 }
 
 #products .main-grid-products .product__cart .row p {
@@ -1488,22 +1514,22 @@ table td div[data-state="NP"] {
   border: none;
   outline: none;
   width: 6rem;
-  border-radius: .5rem;
-  -webkit-border-radius: .5rem;
-  -moz-border-radius: .5rem;
-  -ms-border-radius: .5rem;
-  -o-border-radius: .5rem;
-  padding-block: .5rem;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+  padding-block: 0.5rem;
   margin-inline: auto;
   cursor: pointer;
-  transition: background-color .3s ease-in-out;
-  -webkit-transition: background-color .3s ease-in-out;
-  -moz-transition: background-color .3s ease-in-out;
-  -ms-transition: background-color .3s ease-in-out;
-  -o-transition: background-color .3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+  -webkit-transition: background-color 0.3s ease-in-out;
+  -moz-transition: background-color 0.3s ease-in-out;
+  -ms-transition: background-color 0.3s ease-in-out;
+  -o-transition: background-color 0.3s ease-in-out;
 }
 
-#products .main-grid-products .product__cart button:hover{
+#products .main-grid-products .product__cart button:hover {
   background-color: #e14444;
 }
 

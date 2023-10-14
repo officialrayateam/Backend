@@ -167,3 +167,26 @@ class OrderItem(models.Model):
     class Meta:
         verbose_name = "ایتم"
         verbose_name_plural = "ایتم ها"
+
+class SearchHistory(models.Model):
+    user = models.ForeignKey(
+        Users, on_delete=models.CASCADE, verbose_name="کاربر")
+    text = models.CharField(max_length=199, verbose_name="جستجو")
+
+    def __str__(self):
+        return f"{self.user.get_full_name()} : {self.text}"
+    
+    class Meta:
+        verbose_name = "تاریخچه جست و جو"
+        verbose_name_plural = "تاریخچه ها"
+    
+    @classmethod
+    def add_history(cls,user,text):
+        user_serachs = cls.objects.filter(user=user)
+        answer = None
+        if len(user_serachs) >= 5:
+            user_serachs[-1].delete()
+            answer = cls(user,text).save()
+        else:
+            answer = cls(user,text).save()
+        return answer

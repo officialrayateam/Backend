@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from store.models import Category, Order, OrderItem, Product
 from api.serializers import CategorySerializer, ProductSerializer
+from accounts.permissions import IsUser
 
 
 class MostSell(APIView):
@@ -29,16 +30,21 @@ class Products(APIView):
     def get(self, request):
         category = request.GET.get("category", 0)
         name = request.GET.get("name", "")
+        done = request.GET.get("done", "")
         products = Product.objects.all()
         if category:
             products = products.filter(category__id=category)
         if name:
             products = products.filter(name__contains=name)
+            if done:
+                SearchHistory.add_history(request.user, name)
         answer = ProductSerializer(products, many=True)
         return Response(answer.data)
 
 
 class BasketAddView(APIView):
+    permission_classes = [IsUser]
+
     def get(self, request):
         count = request.GET.get("count", 0)
         product = request.GET.get("product", 0)
@@ -56,6 +62,8 @@ class BasketAddView(APIView):
 
 
 class BasketRemoveView(APIView):
+    permission_classes = [IsUser]
+
     def get(self, request):
         count = request.GET.get("count", 0)
         product = request.GET.get("product", 0)
@@ -68,5 +76,15 @@ class BasketRemoveView(APIView):
                 basket = Order.create_basket(request.user)
                 OrderItem.remove(basket, product, count)
             return Response({"done": True})
+        else:
+            return Response({"done": False})
+
+
+class HistoryView(APIView):
+    def get(self, request):
+        if request.user.is_authenticated:
+            user_serachs = SearchHistory.objects.filter(user=request.user)
+            answer = SearchHistorySerializer(user_serachs, many=True)
+            return Response(answer.data)
         else:
             return Response({"done": False})
