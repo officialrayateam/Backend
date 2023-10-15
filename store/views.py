@@ -10,7 +10,11 @@ from rest_framework.authtoken.models import Token
 class HomeView(View):
     def get(self, request):
         file_names = os.listdir("media/sliders")
-        return render(request, "index.html", {"files": file_names})
+        if request.user.is_authenticated:
+            token, _ = Token.objects.get_or_create(user=request.user)
+        else:
+            token = None
+        return render(request, "index.html", {"files": file_names, "token": token})
 
 
 class LoginRegisterView(View):
@@ -26,9 +30,7 @@ class LoginRegisterView(View):
             user = authenticate(username=username, password=password1)
             if user is not None:
                 login(request, user)
-                token, _ = Token.objects.get_or_create(user=user)
-                file_names = os.listdir("media/sliders")
-                return render(request, "index.html", {"files": file_names, "token": token})
+                return redirect("/")
             else:
                 return render(request, "LoginRegister.html", {"error": "اشکالی در ورود پیش آمد.", "model": "login"})
         elif model == "register":
@@ -38,9 +40,7 @@ class LoginRegisterView(View):
                 username=username, password=password1)
             user.save()
             login(request, user)
-            token, _ = Token.objects.get_or_create(user=user)
-            file_names = os.listdir("media/sliders")
-            return render(request, "index.html", {"files": file_names, "token": token})
+            return redirect("/")
         else:
             return render(request, "LoginRegister.html", {"special_error": "فک کردی میتونی کاری کنی ؟"})
 
