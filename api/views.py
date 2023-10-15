@@ -1,8 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from store.models import Category, Order, OrderItem, Product
-from api.serializers import CategorySerializer, ProductSerializer
+from api.serializers import CategorySerializer, ProductSerializer, SearchHistorySerializer
 from accounts.permissions import IsUser
+from store.models import SearchHistory
 
 
 class MostSell(APIView):

@@ -174,6 +174,9 @@
         <h4>طراحی شده توسط تیم رایا</h4>
         <p>تمامی حقوق مادی و معنوی این اثر متعلق به تیم رایا است.</p>
       </div>
+      {% if token %}
+        <token>{{token}}</token>
+      {% endif %}
     </footer>
     <!-- [end] footer section -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
