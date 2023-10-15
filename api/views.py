@@ -1,3 +1,5 @@
+from rest_framework.authtoken.models import Token
+import rest_framework.authtoken.models
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from store.models import Category, Order, OrderItem, Product
@@ -84,7 +86,7 @@ class BasketRemoveView(APIView):
 class HistoryView(APIView):
     def get(self, request):
         if request.user.is_authenticated:
-            user_serachs = SearchHistory.objects.filter(user=request.user)
+            user_serachs = SearchHistory.objects.filter(user=request.user.id)
             answer = SearchHistorySerializer(user_serachs, many=True)
             return Response(answer.data)
         else:
