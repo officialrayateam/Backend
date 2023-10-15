@@ -78,17 +78,18 @@ class Order(models.Model):
         order_items = self.orderitem_set.all()
         sum_price = 0
         for i in order_items:
-            sum_price += (i.product_price - i.product_discount) * \
-                i.product_count
+            sum_price += ((i.product.price - i.product.discount) *
+                          i.product_count)
         self.order_full_price = sum_price
         self.save()
 
     def get_sum_discount(self):
+        self.update_price()
         order_items = self.orderitem_set.all()
         answer = 0
         for i in order_items:
             if i.product.discount:
-                answer += i.product.discount
+                answer += (i.product.discount * i.product_count)
         return answer
 
     @classmethod
@@ -168,6 +169,7 @@ class OrderItem(models.Model):
         verbose_name = "ایتم"
         verbose_name_plural = "ایتم ها"
 
+
 class SearchHistory(models.Model):
     user = models.ForeignKey(
         Users, on_delete=models.CASCADE, verbose_name="کاربر")
@@ -175,18 +177,18 @@ class SearchHistory(models.Model):
 
     def __str__(self):
         return f"{self.user.get_full_name()} : {self.text}"
-    
+
     class Meta:
         verbose_name = "تاریخچه جست و جو"
         verbose_name_plural = "تاریخچه ها"
-    
+
     @classmethod
-    def add_history(cls,user,text):
+    def add_history(cls, user, text):
         user_serachs = cls.objects.filter(user=user)
         answer = None
         if len(user_serachs) >= 5:
             user_serachs[-1].delete()
-            answer = cls(user,text).save()
+            answer = cls(user, text).save()
         else:
-            answer = cls(user,text).save()
+            answer = cls(user, text).save()
         return answer

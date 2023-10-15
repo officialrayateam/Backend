@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from accounts.models import Users
 import os
 from store.models import Order
+from rest_framework.authtoken.models import Token
 
 
 class HomeView(View):
@@ -25,7 +26,9 @@ class LoginRegisterView(View):
             user = authenticate(username=username, password=password1)
             if user is not None:
                 login(request, user)
-                return redirect("/")
+                token, _ = Token.objects.get_or_create(user=user)
+                file_names = os.listdir("media/sliders")
+                return render(request, "index.html", {"files": file_names, "token": token})
             else:
                 return render(request, "LoginRegister.html", {"error": "اشکالی در ورود پیش آمد.", "model": "login"})
         elif model == "register":
@@ -35,7 +38,9 @@ class LoginRegisterView(View):
                 username=username, password=password1)
             user.save()
             login(request, user)
-            return redirect("/")
+            token, _ = Token.objects.get_or_create(user=user)
+            file_names = os.listdir("media/sliders")
+            return render(request, "index.html", {"files": file_names, "token": token})
         else:
             return render(request, "LoginRegister.html", {"special_error": "فک کردی میتونی کاری کنی ؟"})
 
