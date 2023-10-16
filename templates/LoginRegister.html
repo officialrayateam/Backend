@@ -1,69 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- {Start} icon ------------------------- -->
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <!-- {End} icon ------------------------- -->
-  <link rel="stylesheet" href="/static/assets/css/style.css">
-  <link rel="stylesheet" href="/static/assets/css/responsive.css">
-  <title>ورود / ثبت نام</title>
-</head>
-<body>
-  <main id="LoginRegister">
-    <article class="card" data-type="login">
-      <div class="login__card">
-        <a href="#" class="logo">
-          <img src="/static/images/logo-social.png" alt="logo">
-        </a>
-        <div class="title">
-          <h1>ورود</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- {Start} icon ------------------------- -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- {End} icon ------------------------- -->
+    <link rel="stylesheet" href="/static/assets/css/style.css" />
+    <link rel="stylesheet" href="/static/assets/css/responsive.css" />
+    <title>ورود / ثبت نام</title>
+  </head>
+  <body>
+    <main id="LoginRegister">
+      <article class="card" data-type="login">
+        <div class="login__card">
+          <a href="#" class="logo">
+            <img src="/static/images/logo-social.png" alt="logo" />
+          </a>
+          <div class="title">
+            <h1>ورود</h1>
+          </div>
+          <form action="" method="POST" data-type="login">
+            <input
+              type="text"
+              name="user"
+              id="username"
+              placeholder="نام کاربری"
+            />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="رمز"
+            />
+            <input
+              type="password"
+              name="repeat-password"
+              placeholder="تکرار رمز"
+            />
+            <input type="hidden" name="model" value="login" />
+            {% csrf_token %} {% if error %} {% if model == "login" %}
+            <p style="color: red">{{ error }}</p>
+            {% endif%} {% endif %}
+            <button type="submit">ثبت</button>
+            <button class="register">ثبت نام کنید</button>
+          </form>
         </div>
-        <form action="" method="POST" data-type="login">
-          <input type="text" name="user" placeholder="نام کاربری">
-          <input type="password" name="password" placeholder="رمز">
-          <input type="password" name="repeat-password" placeholder="تکرار رمز">
-          <input type="hidden" name="model" value="login">
-          {% csrf_token %}
-          {% if error %}
-            {% if model == "login" %}
-              <p style="color: red;">{{ error }}</p>
-            {% endif%}
-          {% endif %}
-          <button type="submit">ثبت</button>
-          <button class="register">ثبت نام کنید</button>
-        </form>
-      </div>
-      <div class="register__card">
-        <a href="#" class="logo">
-          <img src="/static/images/logo-social.png" alt="logo">
-        </a>
-        <div class="title">
-          <h1>ثبت نام</h1>
+        <div class="register__card">
+          <a href="#" class="logo">
+            <img src="/static/images/logo-social.png" alt="logo" />
+          </a>
+          <div class="title">
+            <h1>ثبت نام</h1>
+          </div>
+          <form action="" method="POST" data-type="register">
+            <input
+              type="text"
+              name="user"
+              placeholder="نام کاربری"
+              id="R-username"
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="رمز"
+              id="R-password"
+            />
+            <input
+              type="password"
+              name="repeat-password"
+              placeholder="تکرار رمز"
+              id="R-confirm-password"
+            />
+            <input type="hidden" name="model" value="register" />
+            {% csrf_token %} {% if error %} {% if model == "register" %}
+            <p style="color: red">{{ error }}</p>
+            {% endif%} {% endif %}
+            <button type="submit">ثبت</button>
+            <button class="login">ورود</button>
+          </form>
         </div>
-        <form action="" method="POST" data-type="register">
-          <input type="text" name="user" placeholder="نام کاربری">
-          <input type="password" name="password" placeholder="رمز">
-          <input type="password" name="repeat-password" placeholder="تکرار رمز">
-          <input type="hidden" name="model" value="register">
-          {% csrf_token %}
-          {% if error %}
-            {% if model == "register" %}
-              <p style="color: red;">{{ error }}</p>
-            {% endif%}
-          {% endif %}
-          <button type="submit">ثبت</button>
-          <button class="login">ورود</button>
-        </form>
-      </div>
-    </article>
-  </main>
-  {% if special_error %}
+      </article>
+    </main>
+    {% if special_error %}
     <script>
       alert("{{special_error}}");
     </script>
-  {% endif %}
-  <script src="/static/assets/js/LoginRegister.js"></script>
-</body>
+    {% endif %}
+    <script src="/static/assets/js/LoginRegister.js"></script>
+  </body>
 </html>

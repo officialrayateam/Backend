@@ -774,6 +774,14 @@ footer .footer-content p {
   background-color: #15b6d6;
 }
 
+#LoginRegister .card form .showErr {
+  border: 0.1rem solid var(--bg-clr-red);
+}
+
+#LoginRegister .card form .showErr::placeholder {
+  color: var(--bg-clr-red);
+}
+
 /* styling main */
 
 /* --------------------------------------------------Login Register-------------------------------------------------- */
