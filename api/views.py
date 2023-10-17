@@ -1,5 +1,3 @@
-from rest_framework.authtoken.models import Token
-import rest_framework.authtoken.models
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from store.models import Category, Order, OrderItem, Product
@@ -40,7 +38,10 @@ class Products(APIView):
         if name:
             products = products.filter(name__contains=name)
             if done:
-                SearchHistory.add_history(request.user, name)
+                if request.user.is_authenticated:
+                    SearchHistory.add_history(request.user, name)
+                else:
+                    pass
         answer = ProductSerializer(products, many=True)
         return Response(answer.data)
 
