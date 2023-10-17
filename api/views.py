@@ -60,7 +60,7 @@ class BasketAddView(APIView):
             else:
                 basket = Order.create_basket(request.user)
                 OrderItem.add(basket, product, count)
-            return Response({"done": True})
+            return Response({"done": True, "length": len(my_order.orderitem_set.all())})
         else:
             return Response({"done": False})
 
@@ -73,13 +73,14 @@ class BasketRemoveView(APIView):
         product = request.GET.get("product", 0)
         my_order = Order.objects.filter(user=request.user, status="1")
         if request.user.is_authenticated:
+            basket = None
             if my_order.exists():
-                my_order = my_order.get()
-                OrderItem.remove(my_order, product, count)
+                basket = my_order.get()
+                OrderItem.remove(basket, product, count)
             else:
                 basket = Order.create_basket(request.user)
                 OrderItem.remove(basket, product, count)
-            return Response({"done": True})
+            return Response({"done": True, "length": len(my_order.orderitem_set.all())})
         else:
             return Response({"done": False})
 
