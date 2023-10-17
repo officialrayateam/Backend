@@ -188,7 +188,7 @@ class SearchHistory(models.Model):
         answer = None
         if len(user_serachs) >= 5:
             user_serachs[-1].delete()
-            answer = cls(user, text).save()
+            answer = cls(user=user, text=text).save()
         else:
-            answer = cls(user, text).save()
+            answer = cls(user=user, text=text).save()
         return answer
