@@ -10,11 +10,11 @@ from rest_framework.authtoken.models import Token
 class HomeView(View):
     def get(self, request):
         file_names = os.listdir("media/sliders")
-        if request.user.is_authenticated:
+        response = render(request, "index.html", {"files": file_names})
+        if request.user.is_authenticated and not request.COOKIES.get("token", None):
             token, _ = Token.objects.get_or_create(user=request.user)
-        else:
-            token = None
-        return render(request, "index.html", {"files": file_names, "token": token})
+            response.set_cookie(key="token", value=token)
+        return response
 
 
 class LoginRegisterView(View):
