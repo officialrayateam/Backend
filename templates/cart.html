@@ -22,7 +22,7 @@
           </a>
           <ul>
             <li><a href="/login">ورود / ثبت نام <i class='bx bx-user-pin'></i></a></li>
-            <li><a href="/cart">سبد خرید <i class='bx bx-shopping-bag' data-count="{{reqeust.length}}"></i></a></li>
+            <li><a href="/cart">سبد خرید <i class='bx bx-shopping-bag' data-count="{{request.length}}"></i></a></li>
           </ul>
         </nav>
         <div class="form">
@@ -81,6 +81,7 @@
                 <div class="right__section">
                   <h3>{{ item.product.category.name }}</h3>
                   <div class="count__section">
+                    <input type="hidden" name="product_id">
                     <button class="plus__btn"><i class="bx bx-plus"></i></button>
                     <p class="product__count">{{ item.product_count }}</p>
                     <button class="minus__btn"><i class="bx bx-minus"></i></button>
