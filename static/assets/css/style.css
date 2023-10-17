@@ -199,7 +199,6 @@ body[data-type="noScroll"] {
 }
 
 .search__result ul {
-  display: none;
   gap: 1rem;
 }
 
@@ -246,6 +245,39 @@ main {
 
 .over__shadow.show {
   display: block;
+}
+
+.add-product-toast {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  background-color: var(--clr-100);
+  padding: 1.5rem 2rem;
+  border: 0.1rem solid var(--bg-clr-red);
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+}
+
+.add-product-toast p {
+  font-size: 1.4rem;
+  color: var(--clr-900);
+  font-weight: bold;
+}
+
+.add-product-toast.activeProduct {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1001;
 }
 
 /* --------------------------------------------------index-------------------------------------------------- */
@@ -565,7 +597,7 @@ main {
 }
 
 .nav-bottom .main-nav-bottom .item.count-box::before {
-  content: "1";
+  content: attr(data-count);
   position: absolute;
   top: -0.5rem;
   right: 0.5rem;

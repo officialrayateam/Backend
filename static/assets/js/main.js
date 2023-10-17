@@ -43,6 +43,67 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const URL = "http://127.0.0.1:8000/api/";
 
+  const searchForm = document.querySelector(".search");
+
+  searchForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const searchValueForm = searchForm.querySelector("input").value.trim();
+
+    fetch(URL + "products/?name=" + searchValueForm + "&done=1", {
+      headers: {
+        Authorization: "Token " + getCookie("token"),
+      },
+    })
+      .then(() => {
+        location.href = "/products/?name=" + searchValueForm;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
+
+  fetch(URL + "history", {
+    headers: {
+      Authorization: "Token " + getCookie("token"),
+      "Content-Type": "application/json",
+    },
+  })
+    .then(function (response) {
+      if (response.ok) {
+        return response.json();
+      }
+    })
+    .then(function (data) {
+      const searchResult = document.querySelector(".search__result");
+      let noResult = "";
+      let result = "";
+
+      if (data.done == false) {
+        noResult += `<div class="no__result">
+          <img
+            src="/static/images/search-no-result-concept-illustration-flat-design-eps10-modern-graphic-element-for-landing-page-empty-state-ui-infographic-icon-vector.jpg"
+            alt="No Result"
+          />
+        </div>`;
+
+        searchResult.insertAdjacentHTML("beforeend", noResult);
+      } else {
+        data.forEach(function (el) {
+          result += `<li>
+            <a href="/products/?name=${el.text}"><i class="bx bx-search-alt"></i>${el.text}</a>
+          </li>`;
+        });
+
+        searchResult
+          .querySelector("ul")
+          .insertAdjacentHTML("beforeend", result);
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
   fetch(URL + "categories", {
     headers: {
       "Content-Type": "application/json",
@@ -72,6 +133,9 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(error);
     });
 
+  let activeSpecials = true;
+  let activeMostSell = true;
+
   fetch(URL + "specials", {
     headers: {
       "Content-Type": "application/json",
@@ -90,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let text = "";
 
         data.forEach(function (el) {
-          text += itemProductFunc(el, "add-product-btn-most-sell");
+          text += itemProductFunc(el, "add-product-btn-specials");
 
           specialsSection.insertAdjacentHTML("beforeend", text);
           if (data.length > 5) {
@@ -101,14 +165,24 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
       } else {
+        activeSpecials = false;
+
+        const sliderSpecials = document.querySelectorAll("#product-slider")[0];
+        sliderSpecials.remove();
+      }
+    })
+    .then(function () {
+      if (activeSpecials) {
+        const btnSpecials = document.querySelectorAll(
+          ".add-product-btn-specials"
+        );
+
+        addProductFunc(btnSpecials);
       }
     })
     .catch(function (error) {
       console.log(error);
     });
-
-  let mostSellSection = document.querySelector(".most-sells .swiper-wrapper");
-  let mostSellItems = "";
 
   fetch(URL + "most_sell", {
     headers: {
@@ -122,6 +196,11 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then(function (data) {
       if (data.length > 0) {
+        let mostSellSection = document.querySelector(
+          ".most-sells .swiper-wrapper"
+        );
+        let mostSellItems = "";
+
         data.forEach(function (el) {
           mostSellItems += itemProductFunc(el, "add-product-btn-most-sell");
         });
@@ -130,6 +209,19 @@ document.addEventListener("DOMContentLoaded", () => {
           mostSellSection.insertAdjacentHTML("beforeend", buttonShowAllFunc());
         }
       } else {
+        activeMostSell = false;
+
+        const sliderMostSell = document.querySelector(".most-sells");
+        sliderMostSell.remove();
+      }
+    })
+    .then(function () {
+      if (activeMostSell) {
+        const btnMostSell = document.querySelectorAll(
+          ".add-product-btn-most-sell"
+        );
+
+        addProductFunc(btnMostSell);
       }
     })
     .catch(function (error) {
@@ -145,7 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <h3>${data.name}</h3>
           <div class="price">
           ${
-            data.discount == null
+            data.discount == 0
               ? `<p>${data.price} <span>تومان</span></p>`
               : `<del>${data.discount} <span>تومان</span></del>
               <p>${data.price} <span>تومان</span></p>`
@@ -169,5 +261,46 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>`;
 
     return text;
+  }
+
+  let counter = 0;
+
+  function addProductFunc(btnName) {
+    btnName.forEach(function (el) {
+      el.addEventListener("click", function () {
+        let productId = el.getAttribute("data-productId");
+
+        fetch(URL + "basket/add/?count=1&product=" + parseInt(productId), {
+          headers: {
+            Authorization: "Token " + getCookie("token"),
+          },
+        }).then(function () {
+          const dataCounter = document.querySelectorAll(".data-counter");
+          const addProductToast = document.querySelector(".add-product-toast");
+
+          dataCounter.forEach(function (el) {
+            if (el.getAttribute("data-count") == "") {
+              el.setAttribute("data-count", 0);
+            }
+          });
+          counter += 1;
+
+          dataCounter.forEach(function (el) {
+            el.setAttribute("data-count", counter);
+          });
+          addProductToast.classList.add("activeProduct");
+
+          setTimeout(function () {
+            addProductToast.classList.remove("activeProduct");
+          }, 3000);
+        });
+      });
+    });
+  }
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
   }
 });

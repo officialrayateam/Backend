@@ -36,7 +36,7 @@
                 <a href="/cart"
                   >سبد خرید
                   <i
-                    class="bx bx-shopping-bag"
+                    class="bx bx-shopping-bag data-counter"
                     data-count="{{request.length}}"
                   ></i
                 ></a>
@@ -51,28 +51,7 @@
               </button>
               <div class="search__result">
                 <ul>
-                  <li>
-                    <a href="#"><i class="bx bx-search-alt"></i>ماست</a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="bx bx-search-alt"></i>ماست</a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="bx bx-search-alt"></i>ماست</a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="bx bx-search-alt"></i>ماست</a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="bx bx-search-alt"></i>ماست</a>
-                  </li>
                 </ul>
-                <div class="no__result">
-                  <img
-                    src="/static/images/search-no-result-concept-illustration-flat-design-eps10-modern-graphic-element-for-landing-page-empty-state-ui-infographic-icon-vector.jpg"
-                    alt="No Result"
-                  />
-                </div>
               </div>
             </form>
           </div>
@@ -155,7 +134,7 @@
               <i class="bx bx-home-alt-2"></i>
               <p>خانه</p>
             </a>
-            <a href="#" class="item count-box">
+            <a href="#" class="item count-box data-counter" data-count="{{request.length}}">
               <i class="bx bx-shopping-bag"></i>
               <p>سبد خرید</p>
             </a>
@@ -167,6 +146,10 @@
         </div>
       </div>
       <!-- [end] navigation button section -->
+    
+      <div class="add-product-toast">
+        <p>محصول به سبد شما اضافه شد</p>
+      </div>
     </main>
     <!-- [start] footer section -->
     <footer class="pc">
