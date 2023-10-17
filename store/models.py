@@ -136,6 +136,7 @@ class OrderItem(models.Model):
 
     @classmethod
     def add(cls, order, product, count):
+        prod = Product.objects.get(pk=product)
         data = cls.objects.filter(order=order, product__id=product)
         if data.exists():
             my_order_item = data.get()
@@ -146,9 +147,9 @@ class OrderItem(models.Model):
             my_order_item.order.update_price()
             return True
         else:
-            instance = cls(order=order, product_price=product.price,
-                           product_discount=product.discount,
-                           product=product, product_count=count)
+            instance = cls(order=order, product_price=prod.price,
+                           product_discount=prod.discount,
+                           product=prod, product_count=count)
             instance.save()
             instance.order.update_price()
             return True
