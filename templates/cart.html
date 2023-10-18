@@ -81,7 +81,7 @@
                 <div class="right__section">
                   <h3>{{ item.product.category.name }}</h3>
                   <div class="count__section">
-                    <input type="hidden" name="product_id">
+                    <input type="hidden" name="product_id" value="{{ item.product.id }}">
                     <button class="plus__btn"><i class="bx bx-plus"></i></button>
                     <p class="product__count">{{ item.product_count }}</p>
                     <button class="minus__btn"><i class="bx bx-minus"></i></button>

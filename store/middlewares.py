@@ -8,7 +8,11 @@ class BasketMiddleware:
     def __call__(self, request):
         basket = Order.get_basket(request.user)
         if basket:
-            request.length = len(basket.orderitem_set.all())
+            items = basket.orderitem_set.all()
+            sum_product = 0
+            for item in items:
+                sum_product += item.product_count
+            request.length = sum_product
         else:
             request.length = 0
         response = self.get_response(request)
