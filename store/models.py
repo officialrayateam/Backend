@@ -158,11 +158,17 @@ class OrderItem(models.Model):
     def remove(cls, order, product, count):
         data = cls.objects.filter(order=order, product__id=product)
         if data.exists():
-            my_order_item = data.get()
-            my_order_item.product_count -= count
-            my_order_item.save()
-            my_order_item.order.update_price()
-            return True
+            if my_order_item.product_count - count > 0:
+                target_order = my_order_item.order
+                my_order_item.delete()
+                target_order.update_price()
+                return True
+            else:
+                my_order_item = data.get()
+                my_order_item.product_count -= count
+                my_order_item.save()
+                my_order_item.order.update_price()
+                return True
         else:
             return False
 

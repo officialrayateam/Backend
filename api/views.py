@@ -69,7 +69,7 @@ class BasketRemoveView(APIView):
     permission_classes = [IsUser]
 
     def get(self, request):
-        count = request.GET.get("count", 0)
+        count = int(request.GET.get("count", 0))
         product = request.GET.get("product", 0)
         my_order = Order.objects.filter(user=request.user, status="1")
         if request.user.is_authenticated:
