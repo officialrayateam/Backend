@@ -1577,4 +1577,26 @@ table td div[data-state="NP"] {
   color: var(--clr-100);
 }
 
+.not-found-product {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.not-found-product img {
+  width: 40rem;
+}
+
+.not-found-product p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--clr-900);
+  margin-top: 4rem;
+}
+
+.not-found-product.activeNotFound {
+  display: flex;
+}
+
 /* --------------------------------------------------products-------------------------------------------------- */
