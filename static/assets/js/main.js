@@ -63,46 +63,52 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 
-  fetch(URL + "history", {
-    headers: {
-      Authorization: "Token " + getCookie("token"),
-      "Content-Type": "application/json",
-    },
-  })
-    .then(function (response) {
-      if (response.ok) {
-        return response.json();
-      }
+  if (getCookie("token")) {
+    fetch(URL + "history", {
+      headers: {
+        Authorization: "Token " + getCookie("token"),
+        "Content-Type": "application/json",
+      },
     })
-    .then(function (data) {
-      const searchResult = document.querySelector(".search__result");
-      let noResult = "";
-      let result = "";
+      .then(function (response) {
+        if (response.ok) {
+          return response.json();
+        }
+      })
+      .then(function (data) {
+        const searchResult = document.querySelector(".search__result");
+        let noResult = "";
+        let result = "";
 
-      if (data.done == false) {
-        noResult += `<div class="no__result">
-          <img
-            src="/static/images/search-no-result-concept-illustration-flat-design-eps10-modern-graphic-element-for-landing-page-empty-state-ui-infographic-icon-vector.jpg"
-            alt="No Result"
-          />
-        </div>`;
+        if (data.done == false) {
+          noResult += `<div class="no__result">
+            <img
+              src="/static/images/search-no-result-concept-illustration-flat-design-eps10-modern-graphic-element-for-landing-page-empty-state-ui-infographic-icon-vector.jpg"
+              alt="No Result"
+            />
+          </div>`;
 
-        searchResult.insertAdjacentHTML("beforeend", noResult);
-      } else {
-        data.forEach(function (el) {
-          result += `<li>
-            <a href="/products/?name=${el.text}"><i class="bx bx-search-alt"></i>${el.text}</a>
-          </li>`;
-        });
+          searchResult.insertAdjacentHTML("beforeend", noResult);
+        } else {
+          data.forEach(function (el) {
+            result += `<li>
+              <a href="/products/?name=${el.text}"><i class="bx bx-search-alt"></i>${el.text}</a>
+            </li>`;
+          });
 
-        searchResult
-          .querySelector("ul")
-          .insertAdjacentHTML("beforeend", result);
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+          searchResult
+            .querySelector("ul")
+            .insertAdjacentHTML("beforeend", result);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  } else {
+    const searcResult = document.querySelector(".search__result");
+
+    searcResult.remove();
+  }
 
   fetch(URL + "categories", {
     headers: {
@@ -120,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let text = "";
 
         data.forEach((el) => {
-          text += `<li><a href="/products/?id=${el.id}">
+          text += `<li><a href="/products/?category=${el.id}">
             <img src="${el.image}" alt="${el.name}">
             <h3>${el.name}</h3>
           </a></li>`;
@@ -281,9 +287,10 @@ document.addEventListener("DOMContentLoaded", () => {
           dataCounter.forEach(function (el) {
             if (el.getAttribute("data-count") == "") {
               el.setAttribute("data-count", 0);
+            } else {
+              counter = parseInt(el.getAttribute("data-count")) + 1;
             }
           });
-          counter += 1;
 
           dataCounter.forEach(function (el) {
             el.setAttribute("data-count", counter);

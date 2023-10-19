@@ -22,7 +22,7 @@
           </a>
           <ul>
             <li><a href="/login">ورود / ثبت نام <i class='bx bx-user-pin'></i></a></li>
-            <li><a href="/cart">سبد خرید <i class='bx bx-shopping-bag' data-count="{{request.length}}"></i></a></li>
+            <li><a href="/cart">سبد خرید <i class='bx bx-shopping-bag data-counter' data-count="{{request.length}}"></i></a></li>
           </ul>
         </nav>
         <div class="form">
@@ -57,150 +57,10 @@
     <section id="products">
       <div class="container">
         <div class="main-grid-products">
-          <div class="product__cart">
-            <div class="image">
-              <img src="/static/images/product.webp" alt="">
-            </div>
-            <hr>
-            <div class="row">
-              <h3>آجیل چهارمغز</h3>
-              <div>
-                <p><del>19500</del>تومان</p>
-                <p><span>17500</span>تومان</p>
-              </div>
-            </div>
-            <button>
-              <i class="bx bx-shopping-bag"></i>
-            </button>
-          </div>
-          <div class="product__cart">
-            <div class="image">
-              <img src="/static/images/product.webp" alt="">
-            </div>
-            <hr>
-            <div class="row">
-              <h3>آجیل چهارمغز</h3>
-              <div>
-                <p><del>19500</del>تومان</p>
-                <p><span>17500</span>تومان</p>
-              </div>
-            </div>
-            <button>
-              <i class="bx bx-shopping-bag"></i>
-            </button>
-          </div>
-          <div class="product__cart">
-            <div class="image">
-              <img src="/static/images/product.webp" alt="">
-            </div>
-            <hr>
-            <div class="row">
-              <h3>آجیل چهارمغز</h3>
-              <div>
-                <p><del>19500</del>تومان</p>
-                <p><span>17500</span>تومان</p>
-              </div>
-            </div>
-            <button>
-              <i class="bx bx-shopping-bag"></i>
-            </button>
-          </div>
-          <div class="product__cart">
-            <div class="image">
-              <img src="/static/images/product.webp" alt="">
-            </div>
-            <hr>
-            <div class="row">
-              <h3>آجیل چهارمغز</h3>
-              <div>
-                <p><del>19500</del>تومان</p>
-                <p><span>17500</span>تومان</p>
-              </div>
-            </div>
-            <button>
-              <i class="bx bx-shopping-bag"></i>
-            </button>
-          </div>
-          <div class="product__cart">
-            <div class="image">
-              <img src="/static/images/product.webp" alt="">
-            </div>
-            <hr>
-            <div class="row">
-              <h3>آجیل چهارمغز</h3>
-              <div>
-                <p><del>19500</del>تومان</p>
-                <p><span>17500</span>تومان</p>
-              </div>
-            </div>
-            <button>
-              <i class="bx bx-shopping-bag"></i>
-            </button>
-          </div>
-          <div class="product__cart">
-            <div class="image">
-              <img src="/static/images/product.webp" alt="">
-            </div>
-            <hr>
-            <div class="row">
-              <h3>آجیل چهارمغز</h3>
-              <div>
-                <p><del>19500</del>تومان</p>
-                <p><span>17500</span>تومان</p>
-              </div>
-            </div>
-            <button>
-              <i class="bx bx-shopping-bag"></i>
-            </button>
-          </div>
-          <div class="product__cart">
-            <div class="image">
-              <img src="/static/images/product.webp" alt="">
-            </div>
-            <hr>
-            <div class="row">
-              <h3>آجیل چهارمغز</h3>
-              <div>
-                <p><del>19500</del>تومان</p>
-                <p><span>17500</span>تومان</p>
-              </div>
-            </div>
-            <button>
-              <i class="bx bx-shopping-bag"></i>
-            </button>
-          </div>
-          <div class="product__cart">
-            <div class="image">
-              <img src="/static/images/product.webp" alt="">
-            </div>
-            <hr>
-            <div class="row">
-              <h3>آجیل چهارمغز</h3>
-              <div>
-                <p><del>19500</del>تومان</p>
-                <p><span>17500</span>تومان</p>
-              </div>
-            </div>
-            <button>
-              <i class="bx bx-shopping-bag"></i>
-            </button>
-          </div>
-          <div class="product__cart">
-            <div class="image">
-              <img src="/static/images/product.webp" alt="">
-            </div>
-            <hr>
-            <div class="row">
-              <h3>آجیل چهارمغز</h3>
-              <div>
-                <p><del>19500</del>تومان</p>
-                <p><span>17500</span>تومان</p>
-              </div>
-            </div>
-            <button>
-              <i class="bx bx-shopping-bag"></i>
-            </button>
-          </div>
+        </div>
+        <div class="not-found-product">
+          <img src="/media/not-found.svg" alt="not-found.">
+          <p>محصول مورد نظر یافت نشد</p>
         </div>
       </div>
     </section>
@@ -212,7 +72,7 @@
             <i class='bx bx-home-alt-2'></i>
             <p>خانه</p>
           </a>
-          <a href="#" class="item count-box">
+          <a href="#" class="item count-box data-counter" data-count="{{request.length}}">
             <i class='bx bx-shopping-bag'></i>
             <p>سبد خرید</p>
           </a>
@@ -224,6 +84,9 @@
       </div>
     </section>
     <!-- [end] navigation button section -->
+    <div class="add-product-toast">
+      <p>محصول به سبد شما اضافه شد</p>
+    </div>
   </main>
   <!-- [start] footer section -->
   <footer class="pc">
