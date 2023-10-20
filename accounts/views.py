@@ -19,7 +19,9 @@ class LogoutApiView(APIView):
 
     def post(self, request):
         request.user.auth_token.delete()
-        return Response(
+        response = Response(
             data={"message": "Done."},
             status=status.HTTP_204_NO_CONTENT
         )
+        response.delete_cookie("token")
+        return response
