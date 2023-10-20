@@ -80,7 +80,7 @@ class BasketRemoveView(APIView):
             else:
                 basket = Order.create_basket(request.user)
                 OrderItem.remove(basket, product, count)
-            return Response({"done": True, "length": len(my_order.orderitem_set.all())})
+            return Response({"done": True, "length": len(basket.orderitem_set.all())})
         else:
             return Response({"done": False})
 

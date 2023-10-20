@@ -1107,6 +1107,29 @@ footer .footer-content p {
   background-color: var(---bg-clr-pale-green);
 }
 
+#basket-empty {
+  width: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#basket-empty img {
+  width: 40rem;
+}
+
+#basket-empty p {
+  font-size: 1.5rem;
+  margin-top: 4rem;
+  font-weight: bold;
+  color: var(--clr-900);
+}
+
+.activeEmpty {
+  display: flex !important;
+}
+
 /* purchase products */
 
 /* --------------------------------------------------cart-------------------------------------------------- */
